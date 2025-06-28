@@ -1,69 +1,95 @@
-# React + TypeScript + Vite
+# Testing with React-vitest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Prerequisite: `Setup Project using vite react`
 
-Currently, two official plugins are available:
+ ### 1. Install the necessary dependencies
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Configure Vitest in vite.config.ts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```sh
+/// <reference types="vitest" />
+/// <reference types="vitest/config" />
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/vitest.setup.ts'],
+    css : true,
+    testTimeout : 5000,
+    reporters : ['verbose']
   },
-])
+})
+```
+
+### 3. Update package.json
+```sh
+"scripts": {
+  + "test" : "vitest",
+  + "test:watch" : "vitest --watch",
+  + "test:ui" : "vitest --ui"
+}
+```
+
+### 4. Update tsconfig.app.json
+```sh
+ "compilerOptions": {
+    "types": ["vitest/globals"] 
+  },
+ "include": ["src", "src/vitest.setup.ts"]
+```
+
+### 5. Create a setup tests file 
+#### src/vitest.setup.ts
+
+```sh
+import '@testing-library/jest-dom/vitest';
+import { cleanup } from '@testing-library/react';
+import { afterEach } from 'vitest';
+
+afterEach(() => {
+    cleanup()
+})
+```
+
+#### 6. App.tsx file will like this
+```sh
+const App = () => {
+  return (
+    <div>
+      <h1>Hello world! My first test case.</h1>
+    </div>
+  )
+}
+
+export default App
+```
+
+#### 7. Create Test file ---->   App.test.tsx 
+```sh
+import { render, screen } from '@testing-library/react';
+import App from "../src/App";
+
+describe('App', () => {
+  it('renders headline', () => {
+    render(<App />);
+    const headline = screen.getByText(/Hello world! My first test case./i);
+    expect(headline).toBeInTheDocument();
+  });
+});
+```
+
+
+#### 8. Now Run the test
+```sh
+ npm test
 ```

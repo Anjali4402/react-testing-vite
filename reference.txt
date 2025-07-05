@@ -4,6 +4,17 @@ it() ---> test()
 
 
 
+if we have to make a file which consider as a test file then -->
+the name of that file ends with 
+1.file_name.test.js
+2.file_name.spec.js
+3.file_name.spec.jsx
+
+or make folder which consier as a test folder
+__tests__ (inside that all file are consider as a test fileq)
+
+
+
 to run one test file -- npm run test Other (file name)
 
 

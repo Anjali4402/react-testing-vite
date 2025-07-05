@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import App from "./App";
 
 
@@ -21,4 +21,16 @@ test.skip('Test the Input box', ()=> {
   expect(checkInputPlaces).toBeInTheDocument();   
   expect(checkInput).toHaveAttribute('name','username');   // find by name attribute
   expect(checkInput).toHaveAttribute("placeholder", "Enter User Name")  // find by placeholder attribute
+})
+
+
+
+// Test case for onclick event
+describe('Test case for onClick event', ()=>{
+  test('Test case 1', ()=> {
+    render(<App/>);
+    const btn = screen.getByRole('button');  // get button
+    fireEvent.click(btn);   // add fire event
+    expect(screen.getByText('updated data')).toBeInTheDocument(); // is this 'updated data' is in the document or not
+  })
 })

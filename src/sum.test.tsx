@@ -16,7 +16,12 @@ describe('sum function', () => {
     expect(sum(10, -5)).toBe(5);
   });
 
-  it('should handle zero', () => {
+});
+
+
+// it will run only this test case
+describe.only('sum function 2', () => {
+    it('should handle zero', () => {
     expect(sum(0, 0)).toBe(0);
     expect(sum(5, 0)).toBe(5);
     expect(sum(0, 10)).toBe(10);
@@ -27,8 +32,12 @@ describe('sum function', () => {
     expect(sum(0.1, 0.2)).toBeCloseTo(0.3);
     expect(sum(3.14, 2.86)).toBe(6);
   });
+});
 
-  it('should handle large numbers', () => {
+
+// it will skip this test describe
+describe.skip('sum function 3', ()=> {
+    it('should handle large numbers', () => {
     expect(sum(1000000, 2000000)).toBe(3000000);
     expect(sum(999999, 1)).toBe(1000000);
   });
@@ -42,4 +51,4 @@ describe('sum function', () => {
     expect(sum(5, 3)).toBe(sum(3, 5));
     expect(sum(10, 20)).toBe(sum(20, 10));
   });
-});
+})

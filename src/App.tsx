@@ -1,5 +1,7 @@
 // import React from 'react'
 
+import InputBox from "./components/InputBox"
+
 const App = () => {
   return (
     <div>
@@ -13,6 +15,8 @@ const App = () => {
       <img 
       title="kasandbox Image"
       src="https://www.kasandbox.org/programming-images/avatars/cs-hopper-cool.png" />
+
+      <InputBox />
     </div>
   )
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import InputBox from "./components/InputBox"
+import SnapshotTesting from "./components/SnapshotTesting";
 
 const App = () => {
 
@@ -28,6 +29,9 @@ const App = () => {
         Update data
       </button>
       <h1>{data}</h1>
+
+
+      <SnapshotTesting />
 
 
     </div>

@@ -4,6 +4,7 @@ import { useState } from "react"
 import InputBox from "./components/InputBox"
 import SnapshotTesting from "./components/SnapshotTesting";
 import Users from "./components/Users";
+import FunctionalComp from "./components/FunctionalComp";
 
 const App = () => {
 
@@ -35,6 +36,8 @@ const App = () => {
       <SnapshotTesting />
 
       <Users name = 'Kavita' />
+
+      <FunctionalComp />
 
 
     </div>

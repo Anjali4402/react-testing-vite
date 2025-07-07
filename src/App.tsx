@@ -3,6 +3,7 @@
 import { useState } from "react"
 import InputBox from "./components/InputBox"
 import SnapshotTesting from "./components/SnapshotTesting";
+import Users from "./components/Users";
 
 const App = () => {
 
@@ -32,6 +33,8 @@ const App = () => {
 
 
       <SnapshotTesting />
+
+      <Users name = 'Kavita' />
 
 
     </div>

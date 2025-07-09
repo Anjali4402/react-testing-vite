@@ -12,6 +12,10 @@ test('Test onClick case', ()=>{
 
 });
 
-test('Return method test',  ()=>{
-    expect(handleOtherMethod()).toMatch('hi');
+
+
+test('btn testing', ()=>{
+    render(<FunctionalComp />);
+    const btn = screen.getByRole("button", {name : 'Update'});
+    expect(btn).toBeInTheDocument();
 })

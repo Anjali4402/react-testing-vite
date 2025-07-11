@@ -5,6 +5,7 @@ import InputBox from "./components/InputBox"
 import SnapshotTesting from "./components/SnapshotTesting";
 import Users from "./components/Users";
 import FunctionalComp from "./components/FunctionalComp";
+import UserForm from "./components/UserForm";
 
 const App = () => {
 
@@ -13,6 +14,11 @@ const App = () => {
   return (
     <div>
       <h1>Hello world! My first test CASE.</h1>
+
+      <UserForm />
+
+
+
 
       <input type="text" 
       placeholder="Enter User Name"

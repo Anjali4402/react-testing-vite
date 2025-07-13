@@ -15,7 +15,16 @@ const App = () => {
     <div>
       <h1>Hello world! My first test CASE.</h1>
 
+
+<h2>User Form</h2>
+      {/* User form started */}
       <UserForm />
+
+      {/* User form end */}
+
+      <h2>Normal input box</h2>
+      
+      <InputBox />
 
 
 
@@ -29,7 +38,6 @@ const App = () => {
       title="kasandbox Image"
       src="https://www.kasandbox.org/programming-images/avatars/cs-hopper-cool.png" />
 
-      <InputBox />
 
       <button
       onClick={()=>{setData('updated data')}}

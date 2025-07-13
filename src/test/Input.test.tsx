@@ -9,4 +9,17 @@ test('on change event testing', ()=> {
    const input = screen.getByRole('textbox') // if type is text
    fireEvent.change(input, {target : {value : 'a'}}) // if we fire any text
    expect(input.value).toBe('a'+'test'); // in the return the response will be 'atest' like this added with test 
+});
+
+test("Test getByLabelTest", ()=> {
+   render(<InputBox />);
+   const checkLabel = screen.getByLabelText("Test Label"); // will find the lable name
+   expect(checkLabel).toBeInTheDocument();
+})
+
+test('Checkbox test case', ()=>{
+   render(<InputBox />);
+   const checkboxLabel = screen.getByLabelText("Are You Agree");
+   expect(checkboxLabel).toBeInTheDocument(); // is that label is in the document or not.
+   expect(checkboxLabel).toBeChecked();  // weather box is check or not 
 })

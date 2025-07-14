@@ -37,3 +37,23 @@ test("Test getAllByLabelText", () => {
    }
 });
 
+test("getByPlaceholderText and getAllByPlaceholderText", ()=>{
+   render(<InputBox />);
+
+   // if we have to test only one placehoder text
+   const input = screen.getByPlaceholderText("Enter Test Label");
+   expect(input).toBeInTheDocument();
+
+
+   // if we have to test multiple placeholder with same text
+   const muliplePlaceholder = screen.getAllByPlaceholderText("Enter Username");
+
+   // expect(muliplePlaceholder)
+   for(let i =0; i <muliplePlaceholder.length ; i++){
+      expect(muliplePlaceholder[i]).toBeInTheDocument();
+      expect(muliplePlaceholder[i]).toHaveValue("John")
+   }
+
+
+
+})

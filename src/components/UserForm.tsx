@@ -72,6 +72,22 @@ const UserForm = () => {
                 <br />
                 <br />
 
+
+                   <input
+                custom-testid='user-age'
+                 type='number' 
+                name = 'Age'
+                placeholder='Enter Age'
+                value= {54}
+                onChange={handleOnChange}
+                />
+
+
+                <br />
+                <br />
+
+                
+
                 
                 <button
                 type='submit'

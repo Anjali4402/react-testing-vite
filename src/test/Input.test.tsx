@@ -57,3 +57,19 @@ test("getByPlaceholderText and getAllByPlaceholderText", ()=>{
 
 
 })
+
+
+test('getByDisplayValue and getAllByDisplayValue', ()=> {
+   render(<InputBox />);
+   const selectedBox = screen.getByDisplayValue("john@gmail.com");
+
+   const selectedAllBox = screen.getAllByDisplayValue("John");
+
+   for(let i =0 ; i < selectedAllBox.length; i ++ ){
+      expect(selectedAllBox[i]).toBeInTheDocument();
+   } 
+
+   expect(selectedBox).toBeInTheDocument();
+});
+
+

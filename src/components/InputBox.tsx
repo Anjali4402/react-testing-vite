@@ -41,6 +41,13 @@ const InputBox = () => {
             
             <br />
 
+            <label htmlFor="email">Email</label>
+            <input type='email' 
+            id='email'
+            placeholder='Enter Email'
+            defaultValue={'john@gmail.com'}
+            />
+
 
         </div>
     )

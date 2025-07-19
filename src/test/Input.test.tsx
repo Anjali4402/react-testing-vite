@@ -73,3 +73,15 @@ test('getByDisplayValue and getAllByDisplayValue', ()=> {
 });
 
 
+test("Testing getByTitle and getAllByTitle", ()=>{
+   render(<InputBox />);
+
+   const titlebox = screen.getByTitle("Submit the form");
+   expect(titlebox).toBeInTheDocument();
+
+   const allTitleBox = screen.getAllByTitle("testing title");
+   for(let i =0; i< allTitleBox.length; i++){
+      expect(allTitleBox[i]).toBeInTheDocument();
+   }
+
+})

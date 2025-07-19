@@ -49,6 +49,21 @@ const InputBox = () => {
             />
 
 
+            <span title='testing title' >Span 1</span>
+            <span title='testing title' >Span 2</span>
+            <span title='testing title' >Span 3</span>
+            <span title='testing title' >Span 4</span>
+            <span title='testing title' >Span 5</span>
+
+
+
+            <button 
+            title='Submit the form'
+            >
+                Submit
+            </button>
+
+
         </div>
     )
 }

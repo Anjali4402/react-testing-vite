@@ -84,4 +84,20 @@ test("Testing getByTitle and getAllByTitle", ()=>{
       expect(allTitleBox[i]).toBeInTheDocument();
    }
 
+});
+
+
+test("Testing getByAltText and getAllByAltText", ()=>{
+   render(<InputBox />);
+
+   const altbox = screen.getByAltText("alt-text-unique");
+   expect(altbox).toBeInTheDocument();
+
+
+   const allAltBox = screen.getAllByAltText("alt-text");
+   for(let i =0; i < allAltBox.length -1 ; i++){
+      expect(allAltBox[i]).toBeInTheDocument();
+   }
+
+
 })

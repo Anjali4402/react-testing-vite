@@ -64,6 +64,15 @@ const InputBox = () => {
             </button>
 
 
+            <img src="dummy" alt="alt-text" />
+
+            <img src="dummy" alt="alt-text" />
+            <img src="dummy" alt="alt-text-unique" />
+            <img src="dummy" alt="alt-text" />
+
+
+
+
         </div>
     )
 }

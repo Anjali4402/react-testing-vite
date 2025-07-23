@@ -6,6 +6,7 @@ import SnapshotTesting from "./components/SnapshotTesting";
 import Users from "./components/Users";
 import FunctionalComp from "./components/FunctionalComp";
 import UserForm from "./components/UserForm";
+import APICall from "./components/APICall";
 
 const App = () => {
 
@@ -14,6 +15,9 @@ const App = () => {
   return (
     <div>
       <h1>Hello world! My first test CASE.</h1>
+
+
+      <APICall />
 
 
 <h2>User Form</h2>

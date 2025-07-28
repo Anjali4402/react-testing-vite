@@ -8,6 +8,7 @@ import FunctionalComp from "./components/FunctionalComp";
 import UserForm from "./components/UserForm";
 import APICall from "./components/APICall";
 import ButtonClickCounter from "./components/ButtonClickCounter";
+import CheckboxToggleMessage from "./components/CheckboxToggleMessage";
 
 const App = () => {
 
@@ -16,6 +17,8 @@ const App = () => {
   return (
     <div>
       <h1>Hello world! My first test CASE.</h1>
+
+      <CheckboxToggleMessage />
 
       <ButtonClickCounter />
 

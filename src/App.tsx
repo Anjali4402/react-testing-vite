@@ -7,6 +7,7 @@ import Users from "./components/Users";
 import FunctionalComp from "./components/FunctionalComp";
 import UserForm from "./components/UserForm";
 import APICall from "./components/APICall";
+import ButtonClickCounter from "./components/ButtonClickCounter";
 
 const App = () => {
 
@@ -15,6 +16,8 @@ const App = () => {
   return (
     <div>
       <h1>Hello world! My first test CASE.</h1>
+
+      <ButtonClickCounter />
 
 
       <APICall />

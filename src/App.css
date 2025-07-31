@@ -40,3 +40,21 @@
 .read-the-docs {
   color: #888;
 }
+
+
+
+.container {
+  border: 2px solid gray;
+}
+
+button{
+  background-color: crimson;
+}
+
+
+.show-error{
+  color: red;
+}
+.show-success{
+  color: green;
+}

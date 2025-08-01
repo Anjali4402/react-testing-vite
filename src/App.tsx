@@ -11,6 +11,7 @@ import ButtonClickCounter from "./components/ButtonClickCounter";
 import CheckboxToggleMessage from "./components/CheckboxToggleMessage";
 import LoginForm from "./components/LoginForm";
 import './App.css'
+import SignupForm from "./components/SignupForm";
 
 const App = () => {
 
@@ -19,6 +20,9 @@ const App = () => {
   return (
     <div>
       <h1>Hello world! My first test CASE.</h1>
+
+      <h2>Mulit Feature Form</h2>
+      <SignupForm />
       
       
       <h2>Problem 8: Multi-Feature Form Component</h2>

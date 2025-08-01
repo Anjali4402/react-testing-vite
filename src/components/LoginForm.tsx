@@ -15,8 +15,8 @@ const LoginForm = () => {
         setErrorMessage("");
         setSuccessMessage("");
 
-        if (email.includes('@')) {
-            setErrorMessage("Your email is including @")
+        if (!email.includes('@')) {
+            setErrorMessage("Your email is not including @")
         }
         else if (password.length < 6) {
             setErrorMessage("Password must contain 6 character")

@@ -12,6 +12,7 @@ import CheckboxToggleMessage from "./components/CheckboxToggleMessage";
 import LoginForm from "./components/LoginForm";
 import './App.css'
 import SignupForm from "./components/SignupForm";
+import MultiStepForm from "./components/MultiStepForm";
 
 const App = () => {
 
@@ -21,7 +22,10 @@ const App = () => {
     <div>
       <h1>Hello world! My first test CASE.</h1>
 
-      <h2>Mulit Feature Form</h2>
+      <h2>Multi step form</h2>
+      <MultiStepForm />
+
+      <h2>Multi Feature Form</h2>
       <SignupForm />
       
       

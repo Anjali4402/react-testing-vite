@@ -13,6 +13,7 @@ import LoginForm from "./components/LoginForm";
 import './App.css'
 import SignupForm from "./components/SignupForm";
 import MultiStepForm from "./components/MultiStepForm";
+import TodoBox from "./components/TodoBox";
 
 const App = () => {
 
@@ -21,6 +22,10 @@ const App = () => {
   return (
     <div>
       <h1>Hello world! My first test CASE.</h1>
+
+      <h1>ToDo box</h1>
+      <TodoBox />
+
 
       <h2>Multi step form</h2>
       <MultiStepForm />

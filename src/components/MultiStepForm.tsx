@@ -12,7 +12,7 @@ const MultiStepForm = () => {
         confirmPassword: ""
     });
 
-    const [errorMesssage, setErrorMessage] = useState({
+    const [errorMessage, setErrorMessage] = useState({
         name: '',
         email: '',
         password: '',
@@ -53,7 +53,9 @@ const MultiStepForm = () => {
                     name: "Name is Required"
                 }
             })
-        } else if (!formData?.email.includes('@')) {
+        }
+        // else if (!formData?.email.includes('@')) {
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
             setErrorMessage((preError) => {
                 return {
                     ...preError,
@@ -84,7 +86,8 @@ const MultiStepForm = () => {
                     ...preError,
                     password: "Password must be at least 6 characters"
                 }
-            })
+            });
+            return;
         }
         if (formData.password !== formData?.confirmPassword) {
             setErrorMessage((preError) => {
@@ -93,6 +96,7 @@ const MultiStepForm = () => {
                     confirmPassword: "Passwords do not match"
                 }
             })
+            return;
         }
 
         setFormSubmit(true)
@@ -113,9 +117,10 @@ const MultiStepForm = () => {
                                 name='name'
                                 onChange={handleOnchange}
                                 value={formData.name}
+                                aria-label="name"
                                 placeholder='Enter Name'
                             />
-                            {errorMesssage.name && <p>{errorMesssage.name}</p>}
+                            {errorMessage.name && <p>{errorMessage.name}</p>}
 
                             <br /> <br />
 
@@ -124,9 +129,10 @@ const MultiStepForm = () => {
                                 name='email'
                                 onChange={handleOnchange}
                                 value={formData.email}
+                                aria-label="email"
                                 placeholder='Enter Email'
                             />
-                            {errorMesssage.email && <p>{errorMesssage.email}</p>}
+                            {errorMessage.email && <p>{errorMessage.email}</p>}
 
                         </div>
                         :
@@ -136,9 +142,10 @@ const MultiStepForm = () => {
                                 name='password'
                                 onChange={handleOnchange}
                                 value={formData.password}
+                                aria-label='password'
                                 placeholder='Enter Password'
                             />
-                            {errorMesssage.password && <p>{errorMesssage?.password}</p>}
+                            {errorMessage.password && <p>{errorMessage?.password}</p>}
 
                             <br /> <br />
 
@@ -147,9 +154,10 @@ const MultiStepForm = () => {
                                 name='confirmPassword'
                                 onChange={handleOnchange}
                                 value={formData.confirmPassword}
+                                aria-label='confirmPassword'
                                 placeholder='Enter Confirm Password'
                             />
-                            {errorMesssage.confirmPassword && <p>{errorMesssage.confirmPassword}</p>}
+                            {errorMessage.confirmPassword && <p>{errorMessage.confirmPassword}</p>}
 
                         </div>
                 }
@@ -164,13 +172,13 @@ const MultiStepForm = () => {
                 {
                     step === 1 ? (
                         <button
-                            disabled={formData?.name && formData?.email ? false : true}
+                            disabled={!formData.name || !formData.email}  //{formData?.name && formData?.email ? false : true}
                             onClick={handleNext}
                         >Next</button>
                     )
                         :
                         <button
-                            disabled={formData?.password && formData?.confirmPassword ? false : true}
+                            disabled={!formData.password || !formData.confirmPassword} // {formData?.password && formData?.confirmPassword ? false : true}
                             onClick={handleSubmit}
                         >Submit</button>
                 }

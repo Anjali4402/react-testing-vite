@@ -82,36 +82,40 @@ const TodoBox = () => {
             <div>
                 <button
                     onClick={handleAddTask}
+                    data-testid='add-task'
                 >Add</button>
             </div>
 
 
             <table>
                 <thead>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Action</th>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
                 </thead>
-                {
-                    task && task.length > 0 ?
-                        task.map((tk, index) => (
-                            <tbody>
-                                <td>{index + 1}</td>
-                                <td>{tk.name}</td>
-                                <td>
-                                    <button onClick={() => handleEditTaks(tk)} >Edit</button>
-                                    <button onClick={() => handleDeleteTask(tk)}  >Delete</button>
-                                </td>
-                            </tbody>
-                        ))
-
-                        :
-
-                        <p>No Task Found</p>
-                }
+                <tbody>
+                    {
+                        task && task.length > 0 ? (
+                            task.map((tk:TaskType, index) => (
+                                <tr key={tk?._id || index}>
+                                    <td>{index + 1}</td>
+                                    <td>{tk.name}</td>
+                                    <td>
+                                        <button onClick={() => handleEditTaks(tk)}>Edit</button>
+                                        <button onClick={() => handleDeleteTask(tk)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))
+                        ) : (
+                            <tr>
+                                <td colSpan={3}>No Task Found</td>
+                            </tr>
+                        )
+                    }
+                </tbody>
             </table>
-
-
         </div>
     )
 }

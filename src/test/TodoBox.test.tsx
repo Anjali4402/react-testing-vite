@@ -1,60 +1,116 @@
-import { fireEvent, render, screen } from "@testing-library/react"
-import TodoBox from "../components/TodoBox"
-
-
+import { fireEvent, render, screen } from "@testing-library/react";
+import TodoBox from "../components/TodoBox";
 
 describe("Todo web app testing", () => {
+  test("Test initial UI", () => {
+    render(<TodoBox />);
+    const addTaskButton = screen.getByTestId("add-task");
+    expect(addTaskButton).toBeInTheDocument();
+    expect(screen.getByText("No Task Found")).toBeInTheDocument();
+  });
 
-    test("Test initial ui", async () => {
+  test("Test adding with empty input", () => {
+    render(<TodoBox />);
+    const promptMock = vi.spyOn(window, "prompt").mockReturnValue("");
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
 
-        render(<TodoBox />);
+    fireEvent.click(screen.getByTestId("add-task"));
 
-        const addTaskButton = screen.getByTestId("add-task");
+    expect(promptMock).toHaveBeenCalledWith("Enter Task Name");
+    expect(alertMock).toHaveBeenCalledWith("Empty Field is not Required");
 
-        expect(addTaskButton).toBeInTheDocument();
+    promptMock.mockRestore();
+    alertMock.mockRestore();
+  });
 
-    });
+  test("Test adding a valid task", () => {
+    const promptMock = vi.spyOn(window, "prompt").mockReturnValue("Task 1");
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
 
+    render(<TodoBox />);
+    fireEvent.click(screen.getByTestId("add-task"));
 
-    test('Test normally when enter empty input field', async () => {
+    expect(screen.getByText("Task 1")).toBeInTheDocument();
+    expect(screen.getByText("Edit")).toBeInTheDocument();
+    expect(screen.getByText("Delete")).toBeInTheDocument();
 
-        render(<TodoBox />);
+    expect(alertMock).not.toHaveBeenCalled();
 
-        const promptMock = vi.spyOn(window, 'prompt').mockReturnValue('');
-        const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => { });
+    promptMock.mockRestore();
+    alertMock.mockRestore();
+  });
 
-        const addTaskButton = screen.getByTestId("add-task");
+  test("Test editing a task with empty input", () => {
+    // First, add a task
+    const promptAddMock = vi.spyOn(window, "prompt").mockReturnValue("Task 1");
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+    render(<TodoBox />);
+    fireEvent.click(screen.getByTestId("add-task"));
 
+    promptAddMock.mockRestore();
 
-        fireEvent.click(addTaskButton);
+    // Now, edit with empty value
+    const promptEditMock = vi.spyOn(window, "prompt").mockReturnValue("");
+    fireEvent.click(screen.getByText("Edit"));
+    expect(alertMock).toHaveBeenCalledWith("Empty Field is not Required");
 
+    promptEditMock.mockRestore();
+    alertMock.mockRestore();
+  });
 
-        expect(promptMock).toHaveBeenCalledWith('Enter Task Name');
-        expect(alertMock).toHaveBeenCalledWith('Empty Field is not Required');
+  test("Test editing a task with valid value", () => {
+    // Add a task
+    const promptAddMock = vi.spyOn(window, "prompt").mockReturnValue("Task 1");
+    render(<TodoBox />);
+    fireEvent.click(screen.getByTestId("add-task"));
+    promptAddMock.mockRestore();
 
-        promptMock.mockRestore();
-        alertMock.mockRestore();
+    // Edit the task
+    const promptEditMock = vi.spyOn(window, "prompt").mockReturnValue("Updated Task");
+    fireEvent.click(screen.getByText("Edit"));
 
+    expect(screen.getByText("Updated Task")).toBeInTheDocument();
+    expect(screen.queryByText("Task 1")).not.toBeInTheDocument();
 
-    });
+    promptEditMock.mockRestore();
+  });
 
+  test("Test deleting a task", () => {
+    // Add task
+    const promptMock = vi.spyOn(window, "prompt").mockReturnValue("Task 1");
+    render(<TodoBox />);
+    fireEvent.click(screen.getByTestId("add-task"));
+    promptMock.mockRestore();
 
-    it('should proceed normally if valid task name is entered', () => {
-        const promptMock = vi.spyOn(window, 'prompt').mockReturnValue('Buy Milk');
-        const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => { });
+    // Delete task
+    fireEvent.click(screen.getByText("Delete"));
 
-        render(<TodoBox />);
+    expect(screen.getByText("No Task Found")).toBeInTheDocument();
+    expect(screen.queryByText("Task 1")).not.toBeInTheDocument();
+  });
 
-        const addTaskButton = screen.getByTestId("add-task");
-        fireEvent.click(addTaskButton);
+  test("Test adding multiple tasks and deleting one", () => {
+    const promptMock = vi.spyOn(window, "prompt");
 
-        expect(promptMock).toHaveBeenCalledWith('Enter Task Name');
-        expect(alertMock).not.toHaveBeenCalled();
+    render(<TodoBox />);
 
-        promptMock.mockRestore();
-        alertMock.mockRestore();
-    });
+    // Add first task
+    promptMock.mockReturnValue("Task 1");
+    fireEvent.click(screen.getByTestId("add-task"));
 
+    // Add second task
+    promptMock.mockReturnValue("Task 2");
+    fireEvent.click(screen.getByTestId("add-task"));
 
+    expect(screen.getByText("Task 1")).toBeInTheDocument();
+    expect(screen.getByText("Task 2")).toBeInTheDocument();
 
-})
+    // Delete first task
+    fireEvent.click(screen.getAllByText("Delete")[0]);
+
+    expect(screen.queryByText("Task 1")).not.toBeInTheDocument();
+    expect(screen.getByText("Task 2")).toBeInTheDocument();
+
+    promptMock.mockRestore();
+  });
+});
